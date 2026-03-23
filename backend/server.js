@@ -5,7 +5,10 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+}));
 app.use(express.json());
 
 // DEBUG (CHECK ENV LOADED)
@@ -17,7 +20,9 @@ let lastMessageTime = {};
 
 // EMAIL TRANSPORTER
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS
@@ -91,11 +96,13 @@ app.post("/send", async (req, res) => {
     res.send("Message sent successfully!");
 
   } catch (error) {
-    console.log("❌ ERROR:", error);
+    console.log("FULL ERROR:", error);
     res.status(500).send("Error sending email");
   }
 });
 
-app.listen(5000, () => {
-  console.log("🚀 Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
 });
