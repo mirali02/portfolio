@@ -26,12 +26,13 @@ document.getElementById("contactForm").addEventListener("submit", async (e)=>{
 
   try {
     const res = await fetch("https://portfolio-backend-waxw.onrender.com/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
+ alert("Sending... please wait");
 
     const text = await res.text();
     alert(text);
