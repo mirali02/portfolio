@@ -14,7 +14,7 @@ document.querySelectorAll("a").forEach(link => {
 document.getElementById("contactForm").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  console.log("Form submitted ✅"); // DEBUG
+  console.log("Submitting form..."); // DEBUG
 
   const inputs = document.querySelectorAll("input, textarea");
 
@@ -26,8 +26,10 @@ document.getElementById("contactForm").addEventListener("submit", async (e)=>{
 
   try {
     const res = await fetch("https://portfolio-backend-waxw.onrender.com/send", {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
     });
 
@@ -35,7 +37,7 @@ document.getElementById("contactForm").addEventListener("submit", async (e)=>{
     alert(text);
 
   } catch (error) {
-    console.log("❌ ERROR:", error);
+    console.log("ERROR:", error);
     alert("Error connecting to server");
   }
 });
