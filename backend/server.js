@@ -43,7 +43,7 @@ app.post("/send", async (req, res) => {
 
   // RATE LIMIT
   const now = Date.now();
-  if (lastMessageTime[email] && now - lastMessageTime[email] < 10000) {
+  if (lastMessageTime[email] && now - lastMessageTime[email] < 2000) {
     return res.status(429).send("Too many requests. Try later.");
   }
   lastMessageTime[email] = now;
